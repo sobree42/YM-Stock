@@ -26,7 +26,7 @@
 </head>
 
 <body id="page-top">
-
+        @auth
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -153,23 +153,29 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('product.index') }}">{{__('Manage Products')}}</a>
+                        @if ( auth()->user()->position === 1)
                         <a class="collapse-item" href="{{ route('product.create') }}">{{__('Add Product')}}</a>
+                        @endif
                     </div>
                 </div>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('transaction.index') }}" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-history"></i>
-                    <span>{{__('Transactions')}}</span>
-                </a>
-            </li>
-            @if ( auth()->user()->position === 1)
-            <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('report.index') }}" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-chart-bar"></i>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#report"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-globe-americas fa-1x"></i>
                     <span>{{__('Report')}}</span>
                 </a>
+                <div id="report" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item text-center" href="{{ route('transaction.index') }}"> Report Stocking</a>
+                        @if ( auth()->user()->position === 1)
+                        <a class="collapse-item text-center" href="{{ route('report.index') }}"> Stock In Graph</a>
+                    </div>
+                </div>
             </li>
+
             @endif
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#language"
@@ -206,21 +212,6 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    {{-- <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-dark " type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> --}}
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -235,7 +226,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('user.edit', Auth::user()->id) }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{__('Profile')}}
                                 </a>
@@ -280,7 +271,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
+    @endauth
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>

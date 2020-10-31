@@ -20,6 +20,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->position != 1) {
+            return redirect()->route('home');
+            }
         $users = User::where('id', '!=', Auth::id())
                     ->where('id', '!=', 1)
                     ->get();
@@ -33,6 +36,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->position != 1) {
+            return redirect()->route('home');
+            }
         return view('user.create');
     }
 
@@ -44,24 +50,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->position != 1) {
+            return redirect()->route('home');
+            }
         Validator::make($request->all(), [
             'name' => 'required|min:4|max:255',
             'phone' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users',
             'email' => 'required|email|unique:users',
             'gender' => 'required',
-            'profile_picture' => 'required|image',
+            'profile_picture' => 'image',
             'password' => 'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
         ])->validate();
 
-        $filename = $this->getFileName($request->profile_picture);
-        $request->profile_picture->move(base_path('public/img'), $filename);
+        if ($request->profile_picture) {
+            $filename = $this->getFileName($request->profile_picture);
+            $request->profile_picture->move(base_path('public/img'), $filename);
+            }
 
         User::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
             'gender' => $request->gender,
-            'avatar' => "/img/".$filename,
+            'avatar' => isset($filename) ? "/img/".$filename : '',
             'password' => Hash::make($request->password),
         ]);
 
@@ -117,15 +128,14 @@ class UserController extends Controller
         if ($request->profile_picture) {
             $filename = $this->getFileName($request->profile_picture);
             $request->profile_picture->move(base_path('public/img'), $filename);
-
             $user->avatar = "/img/".$filename;
-        }
+            }
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
         $user->save();
 
-        return redirect()->route('user.index')->with('success', 'Staff updated!');
+        return redirect()->route('user.index')->with('success', 'Updated!');
     }
 
     /**
@@ -136,6 +146,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if (auth()->user()->position != 1) {
+            return redirect()->route('home');
+            }
+
         try {
 
             User::destroy($id);

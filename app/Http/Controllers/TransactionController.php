@@ -45,22 +45,23 @@ class TransactionController extends Controller
 
     public function stock_out_store(Request $request, $id)
     {
-        $oldQuantity = Transaction::where('product_id', $id)->select('total_quantity')->orderBy('id','DESC')->first()->total_quantity;
+    $oldQuantity = Transaction::where('product_id', $id)->select('total_quantity')->orderBy('id','DESC')->first();
 
+    if(!$oldQuantity) {
+        return redirect()->route('product.index')->with('success', 'No stocking!');
+    }
 
-        Validator::make($request->all(), [
-            'quantity' => 'required|numeric|min:0.1|max:'.$oldQuantity,
-        ])->validate();
-
-        $transaction = new Transaction;
-        $transaction->product_id = $id;
-        $transaction->quantity = $request->quantity;
-        $transaction->total_quantity = $oldQuantity - $request->quantity;
-        $transaction->status = 'Stock out';
-        $transaction->user_id = Auth::user()->id;
-        $transaction->save();
-
-        return redirect()->route('product.index')->with('success', 'Stock out success!');
+    Validator::make($request->all(), [
+    'quantity' => 'required|numeric|min:0.1|max:'.$oldQuantity->total_quantity,
+    ])->validate();
+    $transaction = new Transaction;
+    $transaction->product_id = $id;
+    $transaction->quantity = $request->quantity;
+    $transaction->total_quantity = ($oldQuantity ? $oldQuantity->total_quantity : 0) - $request->quantity  ;
+    $transaction->status = 'Stock out';
+    $transaction->user_id = Auth::user()->id;
+    $transaction->save();
+    return redirect()->route('product.index')->with('success', 'Stock out success!');
     }
 
     public function corrupt_material_create($id)

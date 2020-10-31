@@ -37,8 +37,8 @@
                         <td>{{ $i+1 }}</td>
                         <td>{{ $transactios[$i]->product->name}}</td>
                         <td>{{ $transactios[$i]->quantity." ".$transactios[$i]->product->unit_type->type }}</td>
-                        <td>{{ $transactios[$i]->total_quantity." ".$transactios[$i]->unit_type_id }}
-                        <td>{{ $transactios[$i]->price}}
+                        <td>{{ $transactios[$i]->total_quantity." ".$transactios[$i]->unit_type_id}}
+                        <td>{{ $transactios[$i]->price ? $transactios[$i]->price : 'Item Out'}}
                         <td>{{ $transactios[$i]->user->name}}</td>
                         <td>{{ $transactios[$i]->created_at->format('d/m/Y') }}</td>
                         <td><span class="badge badge-dark">{{$transactios[$i]->status}}</span></td>

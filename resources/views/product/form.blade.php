@@ -77,14 +77,14 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-6">
+    {{-- <div class="col-md-6">
         <div class="form-group">
             <label for="">{{__('Quantity')}}</label>
             <input type="text" disabled name="quantity" class="form-control"
                 value="0" placeholder="">
         </div>
-    </div>
-    <div class="col-md-6">
+    </div> --}}
+    <div class="col-md-12">
         <div class="form-group">
             <label for="">{{__('Unit Type')}}</label>
             <select class="custom-select @error('unit_type') is-invalid @enderror" name="unit_type">

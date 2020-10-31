@@ -23,7 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/user', 'UserController')->middleware(['auth','admin']);
+Route::resource('/user', 'UserController')->middleware(['auth']);
 Route::resource('/brand', 'BrandController')->middleware(['auth','admin']);
 Route::resource('/category', 'CategoryController')->middleware(['auth','admin']);
 Route::resource('/store', 'StoreController')->middleware(['auth','admin']);
