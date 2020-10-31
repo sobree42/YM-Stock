@@ -24,18 +24,59 @@
 <body class="login_bg">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <div class="btn-group">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{-- {{ config('app.name', 'Laravel') }} --}}
-                <i class="fas fa-home"></i> <span class="text-secondary">Home</a>
+                <i class="fas fa-boxes fa-1x"></i> <span class="text-danger">YM</span> STOCKS</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
             </a>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fas fa-globe-americas fa-1x"></i></button>
-                <div class="dropdown-menu">
-                    <a href="{{ route('language', 'en') }}" class="dropdown-item text-center"><img src="https://img.icons8.com/color/30/000000/great-britain.png"/></a>
-                    <a href="{{ route('language', 'th') }}" class="dropdown-item text-center"><img src="https://img.icons8.com/color/30/000000/thailand.png"/></a>
-                </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-globe-americas fa-1x"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item text-center" href="{{ route('language', 'en') }}"><img src="https://img.icons8.com/color/30/000000/great-britain.png"/></a>
+                          <a class="dropdown-item text-center" href="{{ route('language', 'th') }}"><img src="https://img.icons8.com/color/30/000000/thailand.png"/></a>
+                        </div>
+                      </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
     <div class="container">
 
         <!-- Outer Row -->
@@ -53,7 +94,7 @@
                             <div class="col-lg-6 bg-gradient-dark">
 
 
-                                <div class="p-5">
+                                <div class="p-3">
                                     <div class="text-center">
                                         <h1 class="h4 text-light mb-4">{{__('Login to continue')}}</h1>
                                     </div>
@@ -93,7 +134,7 @@
 
                                     @if (Route::has('password.request'))
                                     <div class="text-center ">
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        <a class="btn btn-link text-danger" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     </div>
@@ -119,7 +160,6 @@
 </div>
 
     </nav>
-
 <!-- Bootstrap core JavaScript-->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

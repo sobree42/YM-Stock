@@ -1,7 +1,7 @@
-@extends('layouts.homepage')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container" style="height: 80vh;">
+<div class="container masthead" style="height: 80vh;">
     <div class="row justify-content-center h-100 align-items-center">
         <div class="col-md-8">
             <div class="card mt-5">

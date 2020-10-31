@@ -10102,6 +10102,14 @@ header.masthead {
   background-attachment: scroll;
   background-size: cover;
 }
+body.masthead {
+
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/ymym.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  }
 header.masthead h1 {
   font-size: 2.25rem;
 }

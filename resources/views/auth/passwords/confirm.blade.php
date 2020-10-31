@@ -1,4 +1,4 @@
-@extends('layouts.homepage')
+@extends('layouts.app2')
 
 @section('content')
 <div class="container" style="height: 80vh;">
