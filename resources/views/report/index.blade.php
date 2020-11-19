@@ -47,7 +47,20 @@
             labels: ['January', 'February', 'Yellow', 'March', 'April', 'May','June','July','August','September','October','November','December'],
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3,],
+                data: [
+                    @for($i = 1; $i <= 12; $i++)
+                        @php($is_print = 0)
+                        @foreach($transaction as $item)
+                            @if($item->monthKey == $i)
+                                @php($is_print = 0)
+                                {{ $item->sums }},
+                            @endif
+                        @endforeach
+                        @if(!$is_print)
+                            0,
+                        @endif
+                    @endfor
+                ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

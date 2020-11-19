@@ -171,7 +171,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item text-center" href="{{ route('transaction.index') }}"> Report Stocking</a>
                         @if ( auth()->user()->position === 1)
-                        <a class="collapse-item text-center" href="{{ route('report.index') }}"> Stock In Graph</a>
+                        <a class="collapse-item text-center" href="{{ route('graph.index') }}"> Stock In Graph</a>
                     </div>
                 </div>
             </li>

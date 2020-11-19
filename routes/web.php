@@ -38,9 +38,8 @@ Route::group(['prefix' => 'transaction', 'middleware' => ['auth']], function(){
     Route::get('corrupt-material/{id}', 'TransactionController@corrupt_material_create')->name('corrupt-material.create');
     Route::post('corrupt-material {id}', 'TransactionController@corrupt_material_store')->name('corrupt-material.store');
     Route::get('transaction', 'TransactionController@transaction_index')->name('transaction.index');
-    Route::get('report', function () {
-        return view('report.index');
-    })->name('report.index');
+
+    Route::get('graph', 'GraphController@index')->name('graph.index');
 });
 // Change Language
 Route::get('locale/{locale}', 'LanguageController@switch')->name('language');
