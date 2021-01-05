@@ -31,14 +31,14 @@
                 <a class="navbar-brand js-scroll-trigger" href="/"><i class="fas fa-boxes fa-1x"></i> <span class="text-primary">YM</span> STOCKS</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">{{__('About')}}</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">{{__('Services')}}</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">{{__('Photos')}}</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">{{__('Contact')}}</a></li>
                         <div class="flex-center position-ref full-height">
                             @if (Route::has('login'))
                                     @auth
-                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">{{__('Home')}}</a></li>
                                     @else
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('login') }}">{{__('Login')}}</a></li>
                                     @endauth
